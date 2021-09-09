@@ -1,0 +1,19 @@
+name: Test of Pull Requests
+on:
+  pull_request:
+    paths-ignore:
+      - '*.md'
+      - .vscode/**
+      - templates/**
+      - LICENSE
+# Optional, set working directory
+# defaults:
+#   run:
+#     working-directory: ./cdk8s
+jobs:
+  test:
+    name: Test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Test
+        run: echo 'Tested'
