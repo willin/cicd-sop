@@ -1,0 +1,34 @@
+name: CICD Prod
+
+on:
+  workflow_dispatch:
+# Optional, set working directory
+# defaults:
+#   run:
+#     working-directory: ./cdk8s
+jobs:
+  # A demo job,
+  publish_to_docker_hub:
+    name: Push Docker image to Docker hub
+    runs-on: ubuntu-latest
+    steps:
+      - name: Build, Publish
+        run: echo 'published'
+
+  # Optional, Test
+  test:
+    name: Test
+    runs-on: ubuntu-latest
+    needs: publish_to_docker_hub
+    steps:
+      - name: Test
+        run: echo 'Tested'
+
+  # Deploy to Prod ENV
+  deploy_prod:
+    name: Deploy to Prod ENV
+    runs-on: ubuntu-latest
+    needs: test
+    steps:
+      - name: Build, Test, Deploy
+        run: echo 'Deployed'
